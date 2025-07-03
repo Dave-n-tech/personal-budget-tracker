@@ -4,12 +4,15 @@ type BudgetFormProps = {
   onClose: () => void;
   categoryId: string | null;
 };
+
 const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
-  const { categories, addCategory, updateCategory } = useAppContext();
+  const { categories, addCategory, updateCategory, deleteCategory } =
+    useAppContext();
   const [name, setName] = useState("");
   const [budgetAmount, setBudgetAmount] = useState("");
   const [color, setColor] = useState("#3B82F6"); // Default blue color
   const [error, setError] = useState("");
+
   // Available colors
   const colorOptions = [
     "#3B82F6",
@@ -19,7 +22,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
     "#8B5CF6",
     "#EC4899",
     "#6B7280",
-    "#F97316", // Orange
+    "#F97316",
   ];
   // If editing, populate form with category data
   useEffect(() => {
@@ -33,9 +36,10 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
     }
   }, [categoryId, categories]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    
     // Validate form
     if (!name.trim()) {
       setError("Please enter a category name");
@@ -56,15 +60,21 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
       color,
     };
 
-    if (categoryId) {
-      updateCategory({
-        ...categoryData,
-        id: categoryId,
-      });
-    } else {
-      addCategory(categoryData);
+    try {
+      if (categoryId) {
+        updateCategory({
+          ...categoryData,
+          id: categoryId,
+        });
+      } else {
+        addCategory(categoryData);
+      }
+    } catch (error) {
+      console.error("Error saving category:", error);
+      setError("Failed to save category. Please try again.");
+      return;
     }
-    
+
     onClose();
   };
   return (
