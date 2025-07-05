@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PlusIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useAppContext } from "../../context/AppContext";
 import BudgetForm from "./BudgetForm";
-import { Transaction } from "../../context/AppContext"; 
+import { Transaction } from "../../types/types";
 
 interface Props {
   transactions: Transaction[];

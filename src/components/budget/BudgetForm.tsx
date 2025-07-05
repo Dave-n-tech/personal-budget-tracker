@@ -6,7 +6,7 @@ type BudgetFormProps = {
 };
 
 const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
-  const { categories, addCategory, updateCategory, deleteCategory } =
+  const { categories, addCategory, updateCategory } =
     useAppContext();
   const [name, setName] = useState("");
   const [budgetAmount, setBudgetAmount] = useState("");
@@ -39,7 +39,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    
+
     // Validate form
     if (!name.trim()) {
       setError("Please enter a category name");

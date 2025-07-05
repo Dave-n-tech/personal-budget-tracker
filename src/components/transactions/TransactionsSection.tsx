@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { PlusIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { format } from "date-fns";
-import { Category, Transaction, useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import TransactionForm from "./TransactionForm";
+import { Category, Transaction, TransactionType } from "../../types/types";
 
 interface Props {
   transactions: Transaction[];
@@ -17,8 +18,12 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
   );
   const [filter, setFilter] = useState("all");
 
-  const getCategoryName = (id: string) =>
-    categories.find((c) => c.id === id)?.name || "Uncategorized";
+  // console.log("TransactionsSection rendered: ", transactions);
+
+  const getCategoryName = (id: string, type: TransactionType) => {
+    if (type === TransactionType.INCOME) return "Income";
+    return categories.find((c) => c.id === id)?.name || "Uncategorized";
+  }
 
   const handleDeleteTransaction = (id: string) => {
     if (window.confirm("Delete this transaction?")) {
@@ -28,8 +33,8 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
 
   const filtered = transactions.filter((t) => {
     if (filter === "all") return true;
-    if (filter === "income") return t.type === "income";
-    if (filter === "expense") return t.type === "expense";
+    if (filter === "income") return t.type === TransactionType.INCOME;
+    if (filter === "expense") return t.type === TransactionType.EXPENSE;
     return t.category === filter;
   });
 
@@ -130,17 +135,17 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
                     </td>
                     <td className="px-6 py-4">{transaction.description}</td>
                     <td className="px-6 py-4">
-                      {getCategoryName(transaction.category)}
+                      {getCategoryName(transaction.categoryId, transaction.type)}
                     </td>
                     <td className="px-6 py-4">
                       <span
                         className={
-                          transaction.type === "income"
+                          transaction.type === TransactionType.INCOME
                             ? "text-green-600"
                             : "text-red-600"
                         }
                       >
-                        {transaction.type === "income" ? "+" : "-"}$
+                        {transaction.type === TransactionType.INCOME ? "+" : "-"}$
                         {transaction.amount.toFixed(2)}
                       </span>
                     </td>

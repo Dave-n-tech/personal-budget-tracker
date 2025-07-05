@@ -4,6 +4,7 @@ import { Header } from "../components/header/Header";
 import { FinanceSummary } from "../components/dashboard/FinanceSummary";
 import BudgetCategories from "../components/budget/BudgetCategories";
 import TransactionsSection from "../components/transactions/TransactionsSection";
+import { TransactionType } from "../types/types";
 
 interface MainPageProps {
   onProfileClick: () => void;
@@ -15,11 +16,11 @@ const MainPage: React.FC<MainPageProps> = ({ onProfileClick }) => {
 
   // Calculate totals
   const totalIncome = transactions
-    .filter((t) => t.type === "income")
+    .filter((t) => t.type === TransactionType.INCOME)
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
   const totalExpenses = transactions
-    .filter((t) => t.type === "expense")
+    .filter((t) => t.type === TransactionType.EXPENSE)
     .reduce((sum, transaction) => sum + transaction.amount, 0);
 
   const balance = totalIncome - totalExpenses;

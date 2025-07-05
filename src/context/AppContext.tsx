@@ -9,7 +9,6 @@ import {
   transactionsCollectionId,
 } from "../appwrite/client";
 import { Query } from "appwrite";
-import { create } from "domain";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -44,6 +43,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             id: doc.$id,
             amount: doc.amount,
             category: doc.category,
+            categoryId: doc.categoryId,
             description: doc.description,
             date: doc.date,
             type: doc.type,
@@ -82,9 +82,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       databaseId,
       transactionsCollectionId,
       ID.unique(),
-      transaction
+      {...transaction,
+        userId: user?.id,
+        id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
+      }
     );
-    setTransactions([...transactions, { ...transaction, id: response.$id }]);
+    console.log("Transaction added:", response);
+    setTransactions([...transactions, { ...transaction, id: response.$id, category: response.category}]);
   };
 
   const updateTransaction = async (updatedTransaction: Transaction) => {
@@ -119,6 +124,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         createdAt: new Date().toISOString(),
       }
     );
+    // console.log("Category added:", response);
     setCategories([...categories, { ...category, id: response.$id }]);
   };
 

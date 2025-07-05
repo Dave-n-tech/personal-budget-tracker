@@ -5,13 +5,18 @@ export type Category = {
   budgetAmount: number;
   color: string;
 };
+export enum TransactionType {
+  INCOME = "Income",
+  EXPENSE = "Expense",
+}
 export type Transaction = {
   id: string;
   amount: number;
   category: string;
+  categoryId: string;
   description: string;
   date: string;
-  type: "income" | "expense";
+  type: TransactionType;
 };
 export type User = {
   id: string;
