@@ -72,8 +72,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
     loadData();
 
-    console.log("Transactions loaded:", transactions);
-    console.log("Categories loaded:", categories);
+    // console.log("Transactions loaded:", transactions);
+    // console.log("Categories loaded:", categories);
   }, []);
 
   // Transaction management

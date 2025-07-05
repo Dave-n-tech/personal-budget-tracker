@@ -18,15 +18,18 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
   const [date, setDate] = useState("");
   const [type, setType] = useState<TransactionType>(TransactionType.EXPENSE);
   const [error, setError] = useState("");
+
   // If editing, populate form with transaction data
   useEffect(() => {
     if (transactionId) {
       const transaction = transactions.find((t) => t.id === transactionId);
+      const category = categories.find((c) => c.id === transaction?.categoryId);
+      console.log("from edit useEffect: category = ", category);
       if (transaction) {
         setDescription(transaction.description);
         setAmount(transaction.amount.toString());
-        setCategory(transaction.category);
-        setDate(transaction.date.split("T")[0]); // Format date for input
+        setCategory(category ? category.name : "");
+        setDate(transaction.date.split("T")[0]);
         setType(transaction.type);
       }
     } else {
@@ -34,7 +37,9 @@ const TransactionForm: React.FC<TransactionFormProps> = ({
       const today = new Date().toISOString().split("T")[0];
       setDate(today);
     }
+
   }, [transactionId, transactions]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
