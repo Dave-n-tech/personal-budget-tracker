@@ -28,6 +28,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           id: accountInfo.$id,
           name: accountInfo.name,
           email: accountInfo.email,
+          password: accountInfo.password ?? ""
         });
 
         const transactionsResponse = await databases.listDocuments(

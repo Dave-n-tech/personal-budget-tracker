@@ -11,14 +11,12 @@ interface Props {
 }
 
 const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
-  const { deleteTransaction } = useAppContext();
+  const { deleteTransaction, } = useAppContext();
   const [isTransactionFormOpen, setIsTransactionFormOpen] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<string | null>(
     null
   );
   const [filter, setFilter] = useState("all");
-
-  // console.log("TransactionsSection rendered: ", transactions);
 
   const getCategoryName = (id: string, type: TransactionType) => {
     if (type === TransactionType.INCOME) return "Income";
@@ -35,7 +33,11 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
     if (filter === "all") return true;
     if (filter === "income") return t.type === TransactionType.INCOME;
     if (filter === "expense") return t.type === TransactionType.EXPENSE;
-    return t.category === filter;
+
+    const category = categories.find((c) => c.id === t.categoryId)?.id;
+    console.log("Category:", category, "Filter:", filter);
+
+    return category === filter;
   });
 
   const sorted = [...filtered].sort(
