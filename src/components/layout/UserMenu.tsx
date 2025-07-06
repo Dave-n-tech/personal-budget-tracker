@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useAppContext } from "../../context/AppContext";
 import { UserIcon, LogOutIcon, UserCircleIcon } from "lucide-react";
+import { account } from "../../appwrite/client";
 
 interface UserMenuProps {
   onProfileClick: () => void;
@@ -22,8 +23,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ onProfileClick }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("budget_tracker_user");
+  const handleLogout = async () => {
+    await account.deleteSession("current")
+    console.log("User logged out");
+    setIsOpen(false);
     setUser(null);
   };
 
