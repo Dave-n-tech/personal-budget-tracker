@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PlusIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { useAppContext } from "../../context/AppContext";
 import BudgetForm from "./BudgetForm";
-import { Transaction } from "../../types/types";
+import { Transaction, TransactionType } from "../../types/types";
 
 interface Props {
   transactions: Transaction[];
@@ -14,9 +14,9 @@ const BudgetCategories: React.FC<Props> = ({ transactions }) => {
   const [editingCategory, setEditingCategory] = useState<string | null>(null);
 
   const spendingByCategory = transactions
-    .filter((t) => t.type === "expense")
+    .filter((t) => t.type === TransactionType.EXPENSE)
     .reduce((acc, t) => {
-      acc[t.category] = (acc[t.category] || 0) + t.amount;
+      acc[t.categoryId] = (acc[t.categoryId] || 0) + t.amount;
       return acc;
     }, {} as Record<string, number>);
 

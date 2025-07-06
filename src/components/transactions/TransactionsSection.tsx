@@ -35,8 +35,6 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
     if (filter === "expense") return t.type === TransactionType.EXPENSE;
 
     const category = categories.find((c) => c.id === t.categoryId)?.id;
-    console.log("Category:", category, "Filter:", filter);
-
     return category === filter;
   });
 
