@@ -95,12 +95,12 @@ const BudgetCategories: React.FC<Props> = ({ transactions }) => {
                     </div>
                   </div>
                   <div className="flex justify-between text-sm text-gray-500 mb-2">
-                    <span>Budget: ${category.budgetAmount.toFixed(2)}</span>
-                    <span>Spent: ${spent.toFixed(2)}</span>
+                    <span>Budget: &#8358;{category.budgetAmount.toFixed(2)}</span>
+                    <span>Spent: &#8358;{spent.toFixed(2)}</span>
                   </div>
                   <div className="mb-1">
                     <span className={`text-sm font-medium ${remaining >= 0 ? "text-green-600" : "text-red-600"}`}>
-                      ${Math.abs(remaining).toFixed(2)} {remaining < 0 ? "over" : "remaining"}
+                      &#8358;{Math.abs(remaining).toFixed(2)} {remaining < 0 ? "over" : "remaining"}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">

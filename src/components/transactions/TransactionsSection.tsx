@@ -145,7 +145,7 @@ const TransactionsSection: React.FC<Props> = ({ transactions, categories }) => {
                             : "text-red-600"
                         }
                       >
-                        {transaction.type === TransactionType.INCOME ? "+" : "-"}$
+                        {transaction.type === TransactionType.INCOME ? "+" : "-"}&#8358;
                         {transaction.amount.toFixed(2)}
                       </span>
                     </td>

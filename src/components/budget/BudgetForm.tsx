@@ -109,7 +109,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ onClose, categoryId }) => {
         </label>
         <div className="relative rounded-md shadow-sm">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-gray-500 sm:text-sm">$</span>
+            <span className="text-gray-500 sm:text-sm">&#8358;</span>
           </div>
           <input
             type="number"
