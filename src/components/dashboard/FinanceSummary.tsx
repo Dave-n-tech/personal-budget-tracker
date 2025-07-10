@@ -10,13 +10,13 @@ export const FinanceSummary: React.FC<SummaryProps> = ({totalIncome, totalExpens
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-sm font-medium text-gray-500">Income</h3>
         <p className="mt-2 text-3xl font-bold text-green-600">
-          ${totalIncome.toFixed(2)}
+          &#8358;{totalIncome.toFixed(2)}
         </p>
       </div>
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-sm font-medium text-gray-500">Expenses</h3>
         <p className="mt-2 text-3xl font-bold text-red-600">
-          ${totalExpenses.toFixed(2)}
+          &#8358;{totalExpenses.toFixed(2)}
         </p>
       </div>
       <div className="bg-white p-6 rounded-lg shadow">
@@ -26,7 +26,7 @@ export const FinanceSummary: React.FC<SummaryProps> = ({totalIncome, totalExpens
             balance >= 0 ? "text-blue-600" : "text-red-600"
           }`}
         >
-          ${balance.toFixed(2)}
+          &#8358;{balance.toFixed(2)}
         </p>
       </div>
     </div>
