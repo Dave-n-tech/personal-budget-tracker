@@ -53,7 +53,7 @@ const Auth: React.FC = () => {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow">
         <div>
           <h1 className="text-center text-3xl font-extrabold text-gray-900">
-            Budget Tracker
+            FinTrack
           </h1>
           <h2 className="mt-6 text-center text-xl font-bold text-gray-900">
             {isLogin ? "Sign in to your account" : "Create a new account"}
